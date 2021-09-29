@@ -1,7 +1,29 @@
+import { useEffect } from "react"
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import { useAppSelector, useAppDispatch } from "../app/hooks"
+import { fetchTopPosts } from "../features/redditPosts/redditPostsSlice"
 
 const Home: NextPage = () => {
+	const dispatch = useAppDispatch();
+	const handleGetPosts = async () => {
+		const resultAction = await dispatch(fetchTopPosts())
+		if (fetchTopPosts.fulfilled.match(resultAction)) {
+			const posts = resultAction.payload
+			console.log("POSTS: ", posts);
+
+		} else {
+			console.log("Error fetching data!!!");
+
+		}
+	}
+
+	useEffect(() => {
+		handleGetPosts();
+	}, [])
+
+	console.log("State: ", useAppSelector((state) => state.redditPosts));
+
 	return (
 		<div className="">
 			<Head>
@@ -11,6 +33,8 @@ const Home: NextPage = () => {
 			</Head>
 
 			<p className="text-base">Content</p>
+
+
 		</div>
 	)
 }
