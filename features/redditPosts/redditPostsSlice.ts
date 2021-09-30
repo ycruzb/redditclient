@@ -1,10 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-interface RedditPost {
+export interface RedditPost {
   title: string;
   author: string;
   date: number;
   comments: number;
+  thumbnail: string;
   unread_status: boolean;
 }
 
@@ -31,9 +32,10 @@ export const fetchTopPosts = createAsyncThunk(
     const result: RedditPost[] = responseJson.data.children.map((item: any) => {
       return {
         title: item.data.title,
-        author: item.data.author_fullname,
+        author: item.data.author,
         date: item.data.created,
         comments: item.data.num_comments,
+        thumbnail: item.data.thumbnail,
         unread_status: true,
       };
     });
