@@ -6,7 +6,7 @@ The state is not persistent due to time available for the development of the dem
 
 ## Live demo
 
-[https://redditclient.vercel.app/](https://redditclient.vercel.app/)
+[https://redditclient-ycruzb.vercel.appp/](https://redditclient-ycruzb.vercel.app/)
 
 # Installation
 
