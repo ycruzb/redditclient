@@ -24,9 +24,6 @@ const Home: NextPage = () => {
 		handleGetPosts();
 	}, [])
 
-	console.log("STATE: ", state);
-
-
 	return (
 		<div className="w-full h-full flex space-x-4">
 			<Head>

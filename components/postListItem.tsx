@@ -4,7 +4,7 @@ import { useAppDispatch } from "../app/hooks"
 
 const PostListItem = ({ id, title, author, date, comments, thumbnail, unread_status }: RedditPost) => {
 	const dispatch = useAppDispatch();
-	const [dismissed, setDismissed] = useState(false)
+	const [dismissed, setDismissed] = useState<boolean>(false)
 
 	const handleTurnActive = (id: string) => {
 		dispatch(turnActive(id))

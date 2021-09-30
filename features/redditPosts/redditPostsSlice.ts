@@ -62,6 +62,9 @@ export const redditPostsSlice = createSlice({
         (post: RedditPost) => post.id !== action.payload
       );
     },
+    dismissAll: (state: RedditPostsState) => {
+      state.posts = [];
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchTopPosts.fulfilled, (state, { payload }) => {
@@ -75,6 +78,6 @@ export const redditPostsSlice = createSlice({
   },
 });
 
-export const { turnActive, dismissPost } = redditPostsSlice.actions;
+export const { turnActive, dismissPost, dismissAll } = redditPostsSlice.actions;
 
 export default redditPostsSlice.reducer;
