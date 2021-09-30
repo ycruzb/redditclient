@@ -13,7 +13,7 @@ const Gallery = () => {
 				</Link>
 			</div>
 			{stateGallery.images.length > 0 ?
-				<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 space-x-5 space-y-5 items-center">
+				<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 space-x-5 space-y-5 content-center">
 					{stateGallery.images.map((image: string) => <div><img className="w-full object-cover" src={image} alt="thumbnail" /></div>)}
 				</div>
 				: <p>There are no images yet!</p>}
