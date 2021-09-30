@@ -13,18 +13,19 @@ const Home: NextPage = () => {
 	const handleGetPosts = async () => {
 		const resultAction = await dispatch(fetchTopPosts())
 		if (fetchTopPosts.fulfilled.match(resultAction)) {
-			const posts = resultAction.payload
-			console.log("POSTS: ", posts);
-
+			/* const posts = resultAction.payload
+			console.log("POSTS: ", posts); */
 		} else {
 			console.log("Error fetching data!!!");
-
 		}
 	}
 
 	useEffect(() => {
 		handleGetPosts();
 	}, [])
+
+	console.log("STATE: ", state);
+
 
 	return (
 		<div className="w-full h-full flex space-x-4">

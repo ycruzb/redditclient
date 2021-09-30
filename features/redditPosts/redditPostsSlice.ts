@@ -1,6 +1,7 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
 export interface RedditPost {
+  id: string;
   title: string;
   author: string;
   date: number;
@@ -11,7 +12,7 @@ export interface RedditPost {
 
 interface RedditPostsState {
   posts: RedditPost[];
-  active_post: boolean | number;
+  active_post: boolean | RedditPost;
   fetching: boolean;
   fetching_error: boolean;
 }
@@ -31,6 +32,7 @@ export const fetchTopPosts = createAsyncThunk(
     const responseJson = await response.json();
     const result: RedditPost[] = responseJson.data.children.map((item: any) => {
       return {
+        id: item.data.id,
         title: item.data.title,
         author: item.data.author,
         date: item.data.created,
@@ -46,7 +48,21 @@ export const fetchTopPosts = createAsyncThunk(
 export const redditPostsSlice = createSlice({
   name: "redditPosts",
   initialState,
-  reducers: {},
+  reducers: {
+    turnActive: (state: RedditPostsState, action: PayloadAction<string>) => {
+      state.active_post = state.posts.filter(
+        (post: RedditPost) => post.id === action.payload
+      )[0];
+      state.posts = state.posts.map((post: RedditPost) =>
+        action.payload === post.id ? { ...post, unread_status: false } : post
+      );
+    },
+    dismissPost: (state: RedditPostsState, action: PayloadAction<string>) => {
+      state.posts = state.posts.filter(
+        (post: RedditPost) => post.id !== action.payload
+      );
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchTopPosts.fulfilled, (state, { payload }) => {
       state.posts = payload;
@@ -58,5 +74,7 @@ export const redditPostsSlice = createSlice({
     });
   },
 });
+
+export const { turnActive, dismissPost } = redditPostsSlice.actions;
 
 export default redditPostsSlice.reducer;
