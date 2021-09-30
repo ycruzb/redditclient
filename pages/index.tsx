@@ -5,6 +5,7 @@ import { useAppSelector, useAppDispatch } from "../app/hooks"
 import { fetchTopPosts } from "../features/redditPosts/redditPostsSlice"
 import Sidebar from "../components/sidebar"
 import PostDetail from "../components/postDetail"
+import MobileMenu from "../components/mobileMenu"
 
 const Home: NextPage = () => {
 	const state = useAppSelector((state) => state.redditPosts)
@@ -25,17 +26,18 @@ const Home: NextPage = () => {
 	}, [])
 
 	return (
-		<div className="w-full h-full flex space-x-4">
-			<Head>
-				<title>Reddit client demo</title>
-				<meta name="description" content="Reddit client demo" />
-				<link rel="icon" href="/favicon.ico" />
-			</Head>
-
-			<Sidebar posts={state.posts} />
-			<PostDetail />
-
-		</div>
+		<>
+			<MobileMenu />
+			<div className="w-full h-full md:flex md:space-x-4">
+				<Head>
+					<title>Reddit client demo</title>
+					<meta name="description" content="Reddit client demo" />
+					<link rel="icon" href="/favicon.ico" />
+				</Head>
+				<Sidebar posts={state.posts} />
+				<PostDetail />
+			</div>
+		</>
 	)
 }
 

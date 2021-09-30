@@ -1,0 +1,24 @@
+import { useAppSelector } from "../app/hooks"
+import Link from "next/link"
+
+const Gallery = () => {
+	const stateGallery = useAppSelector((state) => state.gallery)
+
+	return (
+		<div className="container mx-auto px-6 py-6">
+			<h2 className="text-3xl font-semibold">Gallery</h2>
+			<div className="py-6">
+				<Link href="/">
+					<a className="underline py-3 rounded-lg">Back to Home</a>
+				</Link>
+			</div>
+			{stateGallery.images.length > 0 ?
+				<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 space-x-5 space-y-5 items-center">
+					{stateGallery.images.map((image: string) => <div><img className="w-full object-cover" src={image} alt="thumbnail" /></div>)}
+				</div>
+				: <p>There are no images yet!</p>}
+		</div>
+	)
+}
+
+export default Gallery

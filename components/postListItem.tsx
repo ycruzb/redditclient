@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { RedditPost, turnActive, dismissPost } from "../features/redditPosts/redditPostsSlice"
+import { toggleMenu } from "../features/mobileMenu/mobileMenuSlice"
 import { useAppDispatch } from "../app/hooks"
 
 const PostListItem = ({ id, title, author, date, comments, thumbnail, unread_status }: RedditPost) => {
@@ -8,6 +9,7 @@ const PostListItem = ({ id, title, author, date, comments, thumbnail, unread_sta
 
 	const handleTurnActive = (id: string) => {
 		dispatch(turnActive(id))
+		dispatch(toggleMenu());
 	}
 
 	const handleDismissPost = (id: string) => {
