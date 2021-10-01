@@ -1,11 +1,17 @@
 import { useAppSelector } from "../app/hooks"
 import Link from "next/link"
+import Head from 'next/head'
 
 const Gallery = () => {
 	const stateGallery = useAppSelector((state) => state.gallery)
 
 	return (
 		<div className="container mx-auto px-6 py-6">
+			<Head>
+				<title>Gallery | Reddit client demo</title>
+				<meta name="description" content="Gallery Reddit client demo" />
+				<link rel="icon" href="/favicon.ico" />
+			</Head>
 			<h2 className="text-3xl font-semibold">Gallery</h2>
 			<div className="py-6">
 				<Link href="/">
